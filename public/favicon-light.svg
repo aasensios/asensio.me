@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-  <path fill="#11111b" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 18 18">
+  <defs>
+    <radialGradient id="sun-fill" cx="58%" cy="40%" fx="66%" fy="30%" r="62%">
+      <stop offset="0" stop-color="#ffe08a"></stop>
+      <stop offset="1" stop-color="#ffb43d"></stop>
+    </radialGradient>
+  </defs>
+  <circle cx="12" cy="12" r="9" fill="url(#sun-fill)"></circle>
 </svg>

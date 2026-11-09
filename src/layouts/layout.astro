@@ -75,6 +75,11 @@ const ogImage = new URL("/og.png?v=1", Astro.site);
           for (const button of document.querySelectorAll("[data-theme-toggle]")) {
             button.setAttribute("aria-pressed", String(theme === "dark"));
           }
+          /* The media-gated icons only follow the OS, so point them all at the picked theme. */
+          for (const icon of document.querySelectorAll('link[rel="icon"]')) {
+            icon.removeAttribute("media");
+            icon.href = `/favicon-${theme}.svg`;
+          }
         };
         apply(prefersDark.matches ? "dark" : "light");
         prefersDark.addEventListener("change", (event) => {
