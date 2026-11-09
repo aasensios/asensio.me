@@ -469,7 +469,11 @@ const place = (e: (typeof site.experience)[number], i: number) =>
 
   if (!matchMedia("(hover: hover)").matches) {
     const lanes = [...document.querySelectorAll<HTMLElement>(".lane")];
-    addEventListener("click", (event) => {
+    /*
+     * iOS Safari sends no click for a tap on a plain span unless it looks clickable, so listen
+     * for the end of the tap itself. A tap that turns into a scroll ends in pointercancel instead.
+     */
+    addEventListener("pointerup", (event) => {
       const hit = (event.target as Element).closest<HTMLElement>(".lane");
       for (const lane of lanes) lane.toggleAttribute("data-open", lane === hit && !lane.hasAttribute("data-open"));
     });
