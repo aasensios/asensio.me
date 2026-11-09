@@ -84,6 +84,11 @@ export const site = {
       year: 2026,
     },
     {
+      title: "Claude Code skills",
+      repo: "https://github.com/aasensios/skills",
+      year: 2026,
+    },
+    {
       title: "Google Forms clone",
       repo: "https://github.com/aasensios/google-forms-clone",
       year: 2026,
