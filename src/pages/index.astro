@@ -427,6 +427,16 @@ const place = (e: (typeof site.experience)[number], i: number) =>
 <script>
   import { previewHost } from "../lib/preview";
 
+  /*
+   * showModal() focuses the first button, the close X, which iOS Safari then rings even after a
+   * tap. Focusing the dialog itself lets screen readers announce it and start on its content;
+   * keyboard users reach the X with one Tab, or close with Esc.
+   */
+  const openDialog = (dialog: HTMLDialogElement | null) => {
+    dialog?.showModal();
+    dialog?.focus();
+  };
+
   const card = document.querySelector<HTMLElement>("[data-preview-card]");
   const host = card?.querySelector<HTMLElement>(".site-preview-host");
   if (card && host && matchMedia("(hover: hover)").matches) {
@@ -636,7 +646,7 @@ const place = (e: (typeof site.experience)[number], i: number) =>
       loop.setAttribute("aria-hidden", "true");
       track.append(loop);
     }
-    pack?.showModal();
+    openDialog(pack);
     shown = -1;
     show(index, false);
     sync();
@@ -821,7 +831,7 @@ const place = (e: (typeof site.experience)[number], i: number) =>
   }
 
   const portrait = document.querySelector<HTMLDialogElement>("[data-avatar-dialog]");
-  document.querySelector("[data-avatar-open]")?.addEventListener("click", () => portrait?.showModal());
+  document.querySelector("[data-avatar-open]")?.addEventListener("click", () => openDialog(portrait));
   portrait?.addEventListener("click", () => portrait.close());
 
   const toggle = document.querySelector<HTMLElement>("[data-theme-toggle]");
@@ -981,6 +991,13 @@ const place = (e: (typeof site.experience)[number], i: number) =>
     outline-offset: var(--focus-offset);
   }
 
+  /*
+   * Dialogs take focus themselves on open (see openDialog), so screen readers announce them and no
+   * button lights up after a tap. A ring around the whole dialog would only add noise.
+   */
+  :is(.portrait, .pack):focus {
+    outline: none;
+  }
   /* The dialog sits in the top layer, so it carries its own colours from the page tokens. */
   .portrait {
     margin: auto;
